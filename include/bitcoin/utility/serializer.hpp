@@ -208,6 +208,11 @@ public:
      */
     void set_iterator(const Iterator iter);
 
+    /**
+     * Returns the end-of-stream iterator.
+     */
+    Iterator end() const;
+
 private:
     // Try to advance iterator 'distance' incremenets forwards.
     // Throw if we prematurely reach the end.

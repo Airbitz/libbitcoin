@@ -325,6 +325,12 @@ void deserializer<Iterator>::set_iterator(const Iterator iter)
     iter_ = iter;
 }
 
+template <typename Iterator>
+Iterator deserializer<Iterator>::end() const
+{
+    return end_;
+}
+
 // Try to advance iterator 'distance' incremenets forwards.
 // Throw if we prematurely reach the end.
 template <typename Iterator>
