@@ -42,7 +42,7 @@ if test "$bld_leveldb" = "yes"; then
     CFLAG_LEVELDB="-DLEVELDB_ENABLED"
 fi
 
-AM_CXXFLAGS="-ggdb -g3 -Wall -Wno-missing-braces -pedantic -Wextra -fstack-protector-all -DDEBUG -fvisibility=internal -fvisibility-inlines-hidden"
+AM_CXXFLAGS="-ggdb -g3 -Wall -Wno-missing-braces -pedantic -Wextra -fstack-protector-all -DDEBUG -fvisibility=hidden -fvisibility-inlines-hidden"
 AC_SUBST([AM_CXXFLAGS])
 
 # Allow libsecp256k1 to be installed in a custom path:
