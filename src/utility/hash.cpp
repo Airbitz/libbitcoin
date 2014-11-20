@@ -18,6 +18,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 #include <bitcoin/format.hpp>
+#include <bitcoin/utility/external/hmac_sha256.h>
 #include <bitcoin/utility/external/hmac_sha512.h>
 #include <bitcoin/utility/external/ripemd160.h>
 #include <bitcoin/utility/external/sha1.h>
@@ -69,11 +70,19 @@ long_hash sha512_hash(const data_chunk& chunk)
     return hash;
 }
 
-long_hash hmac_sha512_hash(const data_chunk& chunk, 
+long_hash hmac_sha512_hash(const data_chunk& chunk,
     const data_chunk& key)
 {
     long_hash hash;
     HMACSHA512(chunk.data(), chunk.size(), key.data(),
+        key.size(), hash.data());
+    return hash;
+}
+
+hash_digest hmac_sha256_hash(data_slice chunk, data_slice key)
+{
+    hash_digest hash;
+    HMACSHA256(chunk.data(), chunk.size(), key.data(),
         key.size(), hash.data());
     return hash;
 }

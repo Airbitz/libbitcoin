@@ -27,7 +27,7 @@
 namespace libbitcoin {
 
 /**
-* Generate a ripemd160 hash. This hash function is used in script for 
+* Generate a ripemd160 hash. This hash function is used in script for
 * op_ripemd160.
 *
 * ripemd160(data)
@@ -50,7 +50,7 @@ BC_API short_hash sha1_hash(const data_chunk& chunk);
 BC_API hash_digest sha256_hash(const data_chunk& chunk);
 
 /**
- * Generate a sha256 hash. This hash function is used in electrum seed 
+ * Generate a sha256 hash. This hash function is used in electrum seed
  * stretching, currently only by libwallet.
  *
  * sha256(data)
@@ -74,6 +74,8 @@ BC_API long_hash sha512_hash(const data_chunk& chunk);
 */
 BC_API long_hash hmac_sha512_hash(const data_chunk& chunk,
     const data_chunk& key);
+
+BC_API hash_digest hmac_sha256_hash(data_slice chunk, data_slice key);
 
 /**
  * Generate a typical bitcoin hash. This is the most widely used

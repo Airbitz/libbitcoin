@@ -57,6 +57,7 @@ bitcoin_network_include_HEADERS = \
 
 bitcoin_util_includedir = $(includedir)/bitcoin/utility
 bitcoin_util_include_HEADERS = \
+	utility/array_slice.hpp \
 	utility/assert.hpp \
 	utility/async_parallel.hpp \
 	utility/base58.hpp \
@@ -76,6 +77,7 @@ bitcoin_util_include_HEADERS = \
 
 bitcoin_util_external_includedir = $(includedir)/bitcoin/utility/external/
 bitcoin_util_external_include_HEADERS = \
+    utility/external/hmac_sha256.h \
     utility/external/hmac_sha512.h \
     utility/external/ripemd160.h \
     utility/external/sha1.h \
@@ -86,5 +88,6 @@ bitcoin_util_external_include_HEADERS = \
 
 bitcoin_impl_utility_includedir = $(includedir)/bitcoin/impl/utility
 bitcoin_impl_utility_include_HEADERS = \
+    impl/utility/array_slice.ipp \
     impl/utility/serializer.ipp
 

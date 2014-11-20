@@ -20,6 +20,7 @@
 #include <secp256k1.h>
 #include <bitcoin/utility/assert.hpp>
 #include <bitcoin/utility/ec_keys.hpp>
+#include <bitcoin/utility/hash.hpp>
 
 namespace libbitcoin {
 
@@ -88,6 +89,52 @@ bool verify_private_key(const ec_secret& private_key)
 {
     init.init();
     return secp256k1_ecdsa_seckey_verify(private_key.data()) == 1;
+}
+
+inline data_chunk operator +(data_slice a, data_slice b)
+{
+    data_chunk out;
+    out.reserve(a.size() + b.size());
+    out.insert(out.end(), a.begin(), a.end());
+    out.insert(out.end(), b.begin(), b.end());
+    return out;
+}
+
+BC_API ec_secret create_nonce(ec_secret secret, hash_digest hash)
+{
+    std::reverse(hash.begin(), hash.end());
+    init.init();
+
+    hash_digest K
+    {{
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    }};
+    hash_digest V
+    {{
+        0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+        0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+        0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01,
+        0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01
+    }};
+
+    K = hmac_sha256_hash(V + byte_array<1>{{0x00}} + secret + hash, K);
+    V = hmac_sha256_hash(V, K);
+    K = hmac_sha256_hash(V + byte_array<1>{{0x01}} + secret + hash, K);
+    V = hmac_sha256_hash(V, K);
+
+    while (true)
+    {
+        V = hmac_sha256_hash(V, K);
+
+        if (verify_private_key(V))
+            return V;
+
+        K = hmac_sha256_hash(V + byte_array<1>{{0x00}}, K);
+        V = hmac_sha256_hash(V, K);
+    }
 }
 
 data_chunk sign(ec_secret secret, hash_digest hash, ec_secret nonce)
