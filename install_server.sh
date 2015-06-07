@@ -83,8 +83,6 @@ sleep 30; done" > loopbs
 
 chmod 755 loopbs
 
-./bs --initchain blockchain
-
 #
 # Download part of blockchain from Airbitz backup
 #
