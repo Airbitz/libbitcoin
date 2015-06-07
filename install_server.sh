@@ -96,7 +96,7 @@ Pulling blockchain from Airbitz backup. May take 2-24 hours
 
 Enter the following password when prompted: abRsDa1029384756\n\n"
 
-rsync blocks@bitcoin-rs-dallas.airbitz.co:blockchain.bak/ ~/blockchain --progress --partial -avz
+rsync blocks@bitcoin-rs-dallas.airbitz.co:blockchain.bak/ ~/libbitcoin/blockchain --progress --partial -avz
 
 
 #
