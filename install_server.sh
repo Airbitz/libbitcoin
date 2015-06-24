@@ -78,7 +78,7 @@ echo "
 cd ${userdir}/libbitcoin
 touch keep-going
 while [ -f keep-going ];
-do ./bs ${userdir}/libbitcoin/bs.cfg > ${userdir}/libbitcoin/console.log 2>&1;
+do ./bs ${userdir}/libbitcoin/bs.cfg > ${userdir}/libbitcoin/console.log;
 sleep 30; done" > loopbs
 
 chmod 755 loopbs
