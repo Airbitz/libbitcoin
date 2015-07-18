@@ -11,7 +11,7 @@ mkdir ~/libbitcoin
 #sudo apt-get install tmux
 
 cd ~/libbitcoin
-wget https://github.com/libbitcoin/libbitcoin-server/releases/download/v2.0.0/bs-linux-x64-mainnet
+wget https://github.com/libbitcoin/libbitcoin-server/releases/download/v2.1.0/bs-linux-x64-mainnet
 wget https://github.com/libbitcoin/libbitcoin-explorer/releases/download/v2.1.0/bx-linux-x64-mainnet
 mv bs-linux-x64-mainnet bs
 mv bx-linux-x64-mainnet bx
@@ -94,7 +94,7 @@ Pulling blockchain from Airbitz backup. May take 2-24 hours
 
 Enter the following password when prompted: abRsDa1029384756\n\n"
 
-rsync blocks@bitcoin-rs-dallas.airbitz.co:blockchain.bak/ ~/libbitcoin/blockchain --progress --append --partial -avz
+rsync blocks@bitcoin-serverhub-phoenix.airbitz.co:blockchain.bak/ ~/libbitcoin/blockchain --progress --append --partial -avz
 
 
 #
